@@ -1,0 +1,22 @@
+{
+  "name": "SOS",
+  "children": [
+    {
+      "name": "Word Group 1",
+      "group": 1,
+      "children": [
+        {
+          "name": "Word Group 2",
+          "group": 2,
+          "children": [
+            {
+              "name": "Word Group 3",
+              "group": 3,
+              "children": [
+                {
+                  "name": "EOS"
+                }]
+            }]
+        }]
+    }]
+}

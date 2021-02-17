@@ -1,0 +1,21 @@
+
+.titleRow {
+    margin: 3vh;
+    color: slategrey;
+}
+
+
+.footerText {
+    font-size: 1.2vh;
+}
+
+
+#visRegEx-container {
+    position: absolute;
+    height: 50vh;
+    width: 50vw;
+}
+
+#regexTextDisplay {
+    width: 30vw;
+}
