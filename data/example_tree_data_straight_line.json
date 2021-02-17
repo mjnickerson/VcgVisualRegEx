@@ -1,0 +1,51 @@
+{
+  "name": "SOS",
+  "children": [
+    {
+      "name": "'Word String'",
+      "group": 0,
+      "repeats" : 0,
+      "children": [
+        {
+        "name": "Word Group 1",
+        "group": 1,
+        "repeats" : 0,
+        "children": [
+          {
+            "name": "Word Group 2",
+            "group": 2,
+            "repeats" : 0,
+            "children": [
+              {
+                "name": "Word Group 3",
+                "group": 3,
+                "repeats" : 0,
+                "children": [
+                  {
+                    "name": "Word Group 4",
+                    "group": 4,
+                    "repeats" : 0,
+                    "children": [
+                      {
+                        "name": "Word Group 5",
+                        "group": 5,
+                        "repeats" : 0,
+                        "children": [
+                          {
+                            "name": "Word Group 6",
+                            "group": 6,
+                            "repeats" : 0,
+                            "children": [
+                              {
+                                "name": "Wild Card!",
+                                "group": 7,
+                                "repeats" : 0
+                              }]
+                          }]
+                      }]
+                  }]
+              }]
+          }]
+      }]
+  }]
+}

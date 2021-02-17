@@ -1,0 +1,18 @@
+{
+  "name": "Badabeep",
+  "children": [
+    {
+      "name": "Badabop",
+      "children": [
+        {
+          "name": "Badaboop",
+          "children": [
+            {
+              "name": "Basta",
+              "size": 100
+            }
+          ]
+        }
+      ]
+    }]
+}
