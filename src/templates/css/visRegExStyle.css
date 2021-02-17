@@ -7,8 +7,26 @@
 }
 
 .node circle {
-    fill: #fff;
-    stroke: steelblue;
+    fill: steelblue;
+    stroke: #434343;
+    stroke-width: 1.5px;
+}
+
+.node wordCircle {
+    fill: #fae49f;
+    stroke: #434343;
+    stroke-width: 1.5px;
+}
+
+.node wordRectangle {
+    fill: #fae49f;
+    stroke: #434343;
+    stroke-width: 1.5px;
+}
+
+.node rectangle {
+    fill: steelblue;
+    stroke: #434343;
     stroke-width: 1.5px;
 }
 
@@ -19,13 +37,13 @@
 
 .link {
     fill: none;
-    stroke: #ccc;
+    stroke: #ababab;
     stroke-width: 1.5px;
 }
 
 .templink {
     fill: none;
-    stroke: red;
+    stroke: #c400ff;
     stroke-width: 3px;
 }
 

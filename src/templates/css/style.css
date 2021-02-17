@@ -12,10 +12,8 @@
 
 #visRegEx-container {
     position: absolute;
-    height: 50vh;
-    width: 50vw;
 }
 
 #regexTextDisplay {
-    width: 30vw;
+    width: 80vw;
 }

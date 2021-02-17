@@ -1,3 +1,3 @@
 console.log("Visual Regex Script Starting Up....")
 
-category_colors = ['pink','cyan','seagreen','orange']
+category_colors = ['yellow','pink','cyan','seagreen','orange','violet','aquamarine','red']

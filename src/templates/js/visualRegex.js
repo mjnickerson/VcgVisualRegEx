@@ -3,7 +3,8 @@
 /*Copyright (c) 2013-2016, Rob Schmuecker, All rights reserved.*/
 
 // data_path = "data/example_tree_data_single_point.json"
-data_path = "data/example_tree_data_straight_line.json"
+//data_path = "data/example_tree_data_straight_line.json"
+data_path = "data/example_tree_data_tree_example.json"
 
 
 // Get JSON data
@@ -24,8 +25,8 @@ treeJSON = d3.json(data_path, function(error, treeData) {
     var root;
 
     // size of the diagram
-    var multiplierSizeWidth = 0.55;
-    var multiplierSizeHeight = 0.45;
+    var multiplierSizeWidth = 0.65;
+    var multiplierSizeHeight = 0.55;
     var viewerWidth = $(document).width() * multiplierSizeWidth;
     var viewerHeight = $(document).height() * multiplierSizeHeight;
     // var viewerWidth = "50vw";
@@ -55,6 +56,7 @@ treeJSON = d3.json(data_path, function(error, treeData) {
             }
         }
     }
+
 
     // Call visit function to establish maxLabelLength
     visit(treeData, function(d) {
@@ -347,6 +349,19 @@ treeJSON = d3.json(data_path, function(error, treeData) {
         centerNode(d);
     }
 
+
+    function generateRegEx(graphJSON) {
+        var regexString = ""
+
+        regexString = flatten(graphJSON);
+
+        console.log(regexString)
+
+        return regexString;
+
+    }
+
+
     function update(source) {
         // Compute the new height, function counts total children of root node and sets tree height accordingly.
         // This prevents the layout looking squashed when new nodes are made visible or looking sparse when nodes are removed
@@ -364,7 +379,7 @@ treeJSON = d3.json(data_path, function(error, treeData) {
             }
         };
         childCount(0, root);
-        var newHeight = d3.max(levelWidth) * 25; // 25 pixels per line
+        var newHeight = d3.max(levelWidth) * 100; // 100 pixels per line
         tree = tree.size([newHeight, viewerWidth]);
 
         // Compute the new tree layout.
@@ -406,6 +421,7 @@ treeJSON = d3.json(data_path, function(error, treeData) {
                 return d.children || d._children ? -10 : 10;
             })
             .attr("dy", ".35em")
+            .attr("dx", "4em")
             .attr('class', 'nodeText')
             .attr("text-anchor", function(d) {
                 return d.children || d._children ? "end" : "start";
@@ -418,7 +434,7 @@ treeJSON = d3.json(data_path, function(error, treeData) {
         // phantom node to give us mouseover in a radius around it
         nodeEnter.append("circle")
             .attr('class', 'ghostCircle')
-            .attr("r", 30)
+            .attr("r", 75)
             .attr("opacity", 0.2) // change this to zero to hide the target area
             .style("fill", "red")
             .attr('pointer-events', 'mouseover')
@@ -443,9 +459,9 @@ treeJSON = d3.json(data_path, function(error, treeData) {
 
         // Change the circle fill depending on whether it has children and is collapsed
         node.select("circle.nodeCircle")
-            .attr("r", 4.5)
+            .attr("r", 40.5)
             .style("fill", function(d) {
-                return d._children ? "lightsteelblue" : "#fff";
+                return d._children ? "#434343" : category_colors[d.group];
             });
 
         // Transition nodes to their new position.
@@ -520,6 +536,33 @@ treeJSON = d3.json(data_path, function(error, treeData) {
         });
 
         console.log("Tree Data:", treeData);
+
+
+        // Compile Current Regex of Update
+        var regExText = ""
+
+        // for (var key of Object.keys(treeData)) {
+        //     regExText = regExText + treeData[key].toString() + " "
+        // }
+
+        regExText = regExText + treeData.name + " -> "
+
+
+        if (treeData.children.length > 0) {
+            for (i = 0; i < treeData.children.length; i++) {
+                regExText = regExText + treeData.children[i].name + " OR "
+                console.log(treeData.children[i].children)
+                // if (treeData.children[i].children.length > 0) {
+                //     regExText = regExText + treeData.children[i].children.name + " + "
+                // }
+            }
+        }
+
+        regExText = regExText.substring(0, regExText.length - 3);
+
+        // Display  Current Regex of Update
+        document.getElementById("regexTextDisplay").placeholder = regExText;
+        document.getElementById("regexTextDisplay").value = regExText;
     }
 
     // Append a group which holds all nodes and which the zoom Listener can act upon.
