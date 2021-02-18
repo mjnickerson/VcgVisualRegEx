@@ -1,10 +1,11 @@
 
 //Thoroughly based on "D3.js Drag and Drop, Zoomable, Panning, Collapsible Tree with auto-sizing" by Rob Schmuecker - http://bl.ocks.org/robschmuecker/7880033
-/*Copyright (c) 2013-2016, Rob Schmuecker, All rights reserved.*/
+//Original Base Code: /*Copyright (c) 2013-2016, Rob Schmuecker, All rights reserved.*/
 
 // data_path = "data/example_tree_data_single_point.json"
 //data_path = "data/example_tree_data_straight_line.json"
-data_path = "data/example_tree_data_tree_example.json"
+// data_path = "data/example_tree_data_tree_example.json"
+data_path = "data/example_tree_data_tree_and_line.json"
 
 
 // Get JSON data
