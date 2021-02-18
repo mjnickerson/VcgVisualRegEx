@@ -2,6 +2,10 @@
 //Thoroughly based on "D3.js Drag and Drop, Zoomable, Panning, Collapsible Tree with auto-sizing" by Rob Schmuecker - http://bl.ocks.org/robschmuecker/7880033
 //Original Base Code: /*Copyright (c) 2013-2016, Rob Schmuecker, All rights reserved.*/
 
+
+
+console.log("Visual Regex Visualization Starting Up....")
+
 // data_path = "data/example_tree_data_single_point.json"
 //data_path = "data/example_tree_data_straight_line.json"
 // data_path = "data/example_tree_data_tree_example.json"
@@ -539,31 +543,40 @@ treeJSON = d3.json(data_path, function(error, treeData) {
         console.log("Tree Data:", treeData);
 
 
-        // Compile Current Regex of Update
-        var regExText = ""
-
-        // for (var key of Object.keys(treeData)) {
-        //     regExText = regExText + treeData[key].toString() + " "
-        // }
-
-        regExText = regExText + treeData.name + " -> "
 
 
-        if (treeData.children.length > 0) {
-            for (i = 0; i < treeData.children.length; i++) {
-                regExText = regExText + treeData.children[i].name + " OR "
-                console.log(treeData.children[i].children)
-                // if (treeData.children[i].children.length > 0) {
-                //     regExText = regExText + treeData.children[i].children.name + " + "
-                // }
+        ////////////////////////////
+
+        // Compile Current Regex of UPDATE
+        var regExText = "" //empty string
+
+        regExText = regExText + treeData.name + " -> (" //ROOT OF TREE
+
+        var test_step = 0 //diagnostics
+
+        //iterate over the tree and create a verbal description
+        visit(treeData, function(d) {
+            // test_step++;
+            // console.log(d.name, " at node ", test_step);
+            if (d.name !== "SOS") {
+                regExText = regExText + d.name
+                if (d.children) {
+                    regExText = regExText + " AND "
+                } else {
+                    regExText = regExText + ") OR (" //if end of branch
+                }
             }
-        }
+        }, function(d) {
+            return d.children && d.children.length > 0 ? d.children : null;
+        });
 
-        regExText = regExText.substring(0, regExText.length - 3);
+        console.log("Current Text Output:", regExText);
+
+        regExText = regExText.substring(0, regExText.length - 4); //trim the last OR
 
         // Display  Current Regex of Update
-        document.getElementById("regexTextDisplay").placeholder = regExText;
-        document.getElementById("regexTextDisplay").value = regExText;
+        document.getElementById("humanSummaryTextDisplay").placeholder = regExText;
+        document.getElementById("humanSummaryTextDisplay").value = regExText;
     }
 
     // Append a group which holds all nodes and which the zoom Listener can act upon.
