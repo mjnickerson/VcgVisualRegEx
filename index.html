@@ -35,11 +35,11 @@
 						<input type="text" class="form-control" id="regexTextDisplay" aria-describedby="regexHelp" onChange="parseRegex(this.value)" placeholder="Processing..." maxlength="5000">
 <!--						<small id="regexHelp" class="form-text text-muted">Copy and paste this regular expression to continue.</small>-->
 					</div>
-<!--					<button class="btn btn-primary" id="submitRegex" onclick="parseRegex()">Update</button>-->
+<!--					<button class="btn btn-primary" id="submitRegex" onclick="parseRegex(document.getElementById("regexTextDisplay").value)">Update</button>-->
 				</form>
 			</div>
 			<div class="row justify-content-center">
-<!--				<button class="btn btn-primary" id="submitRegex" onclick="parseRegex()">Update</button>-->
+				<button class="btn btn-primary" id="submitRegex" onclick="parseRegex(document.getElementById('regexTextDisplay').value)">Update</button>
 				<div style="height: 10vh"></div>
 			</div>
 		</div>

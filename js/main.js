@@ -14,7 +14,12 @@ let eventHandler = {};
 //initialize chart variables
 let regexGraph;
 
+//disable unwanted features
+$(document).on("keydown", "form", function(event) { //disable enter key
+    return event.key != "Enter";
+});
 
+//set initial data state of current graph display;
 var current_graph = initial_graph;
 
 //!!!!!!!!!!!! NOTE! DATA IS TEMPORARILY BEING LOADED IN VIA A JS OBJECT IN INITIAL_DATA_OBJECTS.JS -- THIS NEEDS TO BE REMOVED AND JSON BELOW LOADED IN!//
