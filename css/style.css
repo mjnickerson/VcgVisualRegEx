@@ -11,7 +11,8 @@
 
 
 #visRegEx-container {
-    position: absolute;
+    height: 50vh;
+    width: 100vw;
 }
 
 #regexTextDisplay {
@@ -20,4 +21,9 @@
 
 #humanSummaryTextDisplay {
     width: 80vw;
+}
+
+#submitRegex {
+    width: 10vw;
+    height: 3vh;
 }
