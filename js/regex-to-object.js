@@ -20,7 +20,7 @@ console.log("Regex to object active")
 //so:
 // function to convert each character into a graph node - will be utilized over and over again
 
-function createNode(graph, chars) {
+function createNode(graph, chars, repeats) {
     // console.log(chars)
 
     // console.log(graph)
@@ -33,7 +33,7 @@ function createNode(graph, chars) {
     }
 
     //add a new node
-    var addedNodeJSON = {"name": chars, "id":newGroup}
+    var addedNodeJSON = {"name": chars, "id":newGroup, "repeats":repeats}
     graph.nodes[graph.nodes.length] = addedNodeJSON
 
     //add a new link
@@ -61,12 +61,43 @@ function parseRegex() {
     var current_char_string = ""
     for (i = 0; i < regex_string.length; i++) {
         // console.log("At ", i, ":")
-        current_char = regex_string.charAt(i)
+        var current_char = regex_string.charAt(i)
         if (current_char !== ' ') { //if its an actual character
             current_char_string = current_char_string + current_char
+            console.log(current_char_string)
         } else { // its a space - starts a new node
-            createNode(current_graph, current_char_string)
-            // console.log('adding new node')
+            if (current_char_string[0] === '(') {
+                //trigger a processing loop to find branches
+                var branch_string = ""
+                for (j = 0; j < current_char_string.length; j++) { //loop over the branch substring
+                    var current_branch_char = current_char_string.charAt(j)
+                    if (current_branch_char === '|') { //find |
+                        createNode(current_graph, branch_string.substring(2, branch_string.length), 0) //create a branch node
+                        branch_string = ""
+                    } else if (current_branch_char === ')') { //find end of sequence
+                        createNode(current_graph, branch_string.substring(1, branch_string.length - 1), 0) //create a branch node}
+                        branch_string = ""
+                    } else {
+                        branch_string += branch_string + current_branch_char //continue adding to a substring
+                    }
+                }
+            } else if (current_char_string[1] === '{') { //if its a char followed by a repeat
+                var repeat_string = ""
+                for (k = 0; k < current_char_string.length; k++) { //loop over the repeat string
+                    var current_repeat_char = repeat_string.charAt(k)
+                    if (current_repeat_char === '}') { //find end of repeat
+                        //split string
+                        var node_char = repeat_string.substring(0, 1)//first char
+                        console.log("node:", node_char)
+                        var repeat_num = repeat_string.substring(1, repeat_string.length-1) //repeat characters
+                        console.log("repeatNum:", repeat_num)
+                        createNode(current_graph, node_char, parseInt(repeat_num)) //create a branch node
+                    }
+                }
+            } else {
+                createNode(current_graph, current_char_string, 0)
+                // console.log('adding new node')
+            }
             current_char_string = ""
         }
     }
